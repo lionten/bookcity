@@ -1,0 +1,39 @@
+.info{color:#eee;padding-left: 30px}
+.con{width:74.5%;margin:0 auto;overflow:hidden;}
+.con li{float:left;width:15%;margin:10px 4% 30px 0;border:1px solid #ddd;border-radius:5px;padding:30px 3%;position:relative;}
+.con li img{width:100%;}
+#nav{position: relative;}
+#nav span{color:#eee;position:absolute;right:5%;top: 30%}
+.con #tit{display:block;overflow: hidden;white-space:nowrap;text-overflow:ellipsis;padding:20px 0 15px;
+	color:#333;font-size:20px;}
+.con #buy{display:inline-block;width:40%;height:30px;background:#5cb85c;border:1px solid #4cae4c;border-radius:5px;
+	position:absolute;right:8%;bottom:20px;line-height:30px;text-align:center;color:white;}
+.page{text-align:center;}
+.page span{display:inline-block;width:30px;height:30px;cursor: pointer;border:1px solid black;
+	line-height:30px;margin-right:10px}
+.page .bk{background:cyan}
+.page span:nth-of-type(1){border:none;width:60px;margin-left:-20%}
+.left,.rig{margin-top:50px;float: left;}
+.left{width: 30%}
+.left img{width:100%}
+.rig{width:50%}
+.rig{color:#646464}
+.rig h2{font-weight:400;font-size:36px;color:#323232}
+.rig >p{text-indent:36px;font-size:18px;padding:15px 0}
+.rig .other{background:#ebebeb;margin-top:20px}
+.other p{padding-bottom:10px}
+.other p:nth-of-type(1),.other p:nth-of-type(2){color:#337ab7;font-weight:700 }
+.other p:last-of-type{color:#ff2832;font-size:30px}
+.other span{color:#646464;font-weight:400;font-size:16px}
+.rig a{display:inline-block;width:24%;height:50px;border-radius:7px;line-height:50px;
+	font-size:20px;color:white;background:#ff2832;text-align: center;margin:50px 23% 0 2%;
+	border:2px solid #ff2933;}
+.rig a:nth-of-type(2){background:#ffedee;color:#ff2832;}
+.shopcart{position:relative;}
+#nav .shopcart span{position:absolute;right:0;display:inline-block;height:20px;width:20px;
+	text-align:center;border-radius:50%;background:red;font-size:14px;}
+
+
+
+
+

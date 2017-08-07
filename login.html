@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/home.css">
+	<script src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<!-- 导航条 -->
+	<div class="header_nav">
+		<p>
+			<a href="###">书吧</a>
+			<a href="###">网站首页</a>
+			<a href="###">关于我们</a>
+			<a href="###">图片展示</a>
+			<a href="###">联系我们</a>
+			<a href="###">购物车</a>
+			<a href="###">添加图书</a>
+		</p>
+	</div>
+	<!-- 左边：内容 -->
+	<div class="con">
+		<h1>我的书城</h1>
+		<p>这里拥有世界各地的书籍，只有你想不到，没有我们这里没有的图书</p>
+		<img src="img/banner.png">
+	</div>
+	<!-- 右边：登录 -->
+	<div class="login">
+		<h3>快速登录</h3>
+		<input type="text" placeholder="用户名" id="user"><br>
+		<input type="password" placeholder="密码" id="pass"><br>
+		<input type="submit" value="登录" id="log">
+		<input type="submit" value="注册" id="regis">
+	</div>
+	<script>
+		var log = $("#log");
+		var regis = $("#regis")
+		//点击注册，执行插入数据库操作
+		regis.click(function(){
+			//获取输入的用户名和密码
+			var username = $("#user").val();
+			var password = $("#pass").val();
+			$.ajax({
+				url:"php/regis.php",
+				type:"post",
+				data:{
+					user:username,
+					pass:password,
+				},
+				dataType:"json",
+				success:function(str){
+					if(str.err == 0){
+						alert(str.msg)
+					}else if(str.err == 1){
+						alert(str.msg)
+					}
+				}
+			})
+		})
+
+		//点击登录，执行跳转至首页的操作
+		log.click(function(){
+			//获取输入的用户名和密码
+			var username = $("#user").val();
+			var password = $("#pass").val();
+			$.ajax({
+				url:"php/login.php",
+				type:"post",
+				data:{
+					user:username,
+					pass:password,
+				},
+				dataType:"json",
+				success:function(str){
+					if(str.err == 0){
+						alert(str.msg)
+						window.location.href = "homepage3.html";
+					}else if(str.err == 1){
+						alert(str.msg)
+					}else{
+						alert(str.msg)
+					}
+				}
+			})
+		})
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

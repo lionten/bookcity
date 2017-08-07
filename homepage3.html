@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>头部导航条</title>
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/home2.css">
+	<script src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<!-- 导航条 -->
+	<div class="header_nav">
+		<p id="nav">
+			<a href="###">书吧</a>
+			<a href="homepage3.html" class="focus index">网站首页</a>
+			<a href="###">关于我们</a>
+			<a class="show" href="homepage3.html">图片展示</a>
+			<a href="###">联系我们</a>
+			<a class="shopcart" href="buy.html">购物车</a>
+			<a href="add_book.html">添加图书</a>
+			<a href="login.html">退出</a>
+		</p>
+
+	</div>
+	<ul class="con"></ul>
+	<div class='page'></div>
+	<script>
+		function getdata(page){
+		$.ajax({
+			type:'POST',
+			url:'php/page.php',
+			data:{
+				'p':page
+			},
+			dataType:'json',
+			success:function(json){
+				console.log(json)
+				user = json.user;
+				total = json.total;//数据表中总数据
+				pagesize = json.pagesize;//每页显示数据
+				curpage = page;//当前页
+				total_page = json.total_page;//总页数
+				var li = ""
+				var list = json.list;//存放图书信息
+				console.log(list);
+				//遍历json数据列
+				$.each(list,function(index,arr){	
+					$(".con").empty();
+                	li += '<li><img src='+arr['src']+'><a href="###" id="tit">'+arr['bkname']+'</a><span>￥'+arr['price']+'</span><a href="###" id="buy" no='+arr['no']+'>立即购买</a></li>'					
+                	$(".con").append(li)
+				})
+
+				//获取图片信息，实现图片展示
+				var lis = $('li').length;
+				console.log(lis)
+				for(i = 0;i<lis;i++){
+					$('img').eq(i).click(function(){
+					//获取相应图片的路径
+					var $src = $(this).attr("src");
+					// alert($src)
+					console.log($src)
+					//利用ajax访问show.php,进行交互
+						$.ajax({
+						url:'show.php',
+						type:'get',
+						data:{
+							src:$src
+						},
+						// dataType:'json',
+						success:function(str){
+							// alert($src)
+							console.log(str)
+							window.location.href = "show.php?src="+$src
+						}
+
+						})
+					})
+				}
+
+				//实现购物车:点击立即购买，购物车数量+1
+				var shopcart = $(".shopcart");	
+				var buy = $("li #buy");
+				var n=0
+				buy.click(function(){
+					n++;
+					var up = "购物车<span>"+n+"</span>";
+					shopcart.html(up)
+					//通过每个购买的no来获取相应的数据
+					var no = $(this).attr('no');
+					$.ajax({
+						url:'php/save_buy.php',
+						type:'post',
+						data:{
+							'no':no
+						},
+						success:function(str){
+							console.log(str)
+						}
+					})
+				})
+				
+				//把信息插入在导航条上
+				var span = "<span>"+user+"</span>";
+				console.log(span)
+				$("#nav span").empty();
+				$("#nav").append(span)
+
+			},
+			complete:function(){
+					getpage()
+				}
+		})
+		}	
+		//获取分页
+		function getpage(){
+			//页码超过最大页数
+			if(curpage>total_page){
+				curpage = total_page
+			}
+			//页码小于1
+			if(curpage<1){
+				curpage = 1
+			}
+			pageStr = "<span>共"+total_page+"页</span>&nbsp"
+			
+
+			//实现页面跳转
+			for(i=1;i<= total_page;i++){
+				page = i
+				pageStr += "<span class='link_"+i+"'rel="+i+">"+i+"</span>"
+			}
+			$(".page").html(pageStr)
+
+			//点击页码，传入到php文件，进行后台数据库数据的调取
+			for(j=1;j<=total_page;j++){
+				$(".link_"+j).click(function(){
+					var rel = $(this).attr("rel");
+
+					if(rel){
+						getdata(rel)
+					}
+				})
+			}
+		}
+
+		$((function(){
+			getdata(1);
+		}))
+	</script>
+
+</body>
+</html>

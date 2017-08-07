@@ -1,0 +1,11 @@
+.con{width:52%;margin:40px 0 0 10.7%;padding:3% 4.5%;background:#eee;float:left}
+.con >h1{font-size:70px}
+.con >p{font-size:26px;color:#666;padding:15px 0;}
+.con >img{width:100%}
+.login{float:right;margin:40px 10.7% 0 0}
+.login >h3{font-size:40px;padding-top:10px;}
+#user,#pass{padding:8px 10px;height:20px;border-radius:4px;border:2px solid #ccc;width:200px;color:#666} 
+#pass{margin:15px 0;}
+.login input{font-size:18px;}
+#log,#regis{padding:2px 8px;color:#333;border-radius:4px;background:white}
+#log{margin:0 20px 0 40px}
